@@ -31,7 +31,7 @@ FROM debian:13.4-slim
 
 # === INSTALACIÓN DE PAQUETES ===
 RUN apt-get update \
-    && apk add --no-cache nginx \
+    && apt -y install nginx \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -u 1001 appuser
