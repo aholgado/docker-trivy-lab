@@ -31,7 +31,7 @@ FROM debian:12-slim
 
 # === INSTALACIÓN DE PAQUETES ===
 RUN apt-get update \
-    && apt-get install -y openssl curl wget netcat-traditional \
+    && apt-get install -y openssl wget netcat-traditional \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -u 1001 appuser
