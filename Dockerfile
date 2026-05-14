@@ -27,16 +27,16 @@
 
 # === IMAGEN BASE ===
 # TODO: Cambiar esta imagen base (debian:13-slim es más moderna y segura)
-FROM debian:12-slim
+FROM debian:13.4-slim
 
 # === INSTALACIÓN DE PAQUETES ===
 RUN apt-get update \
-    && apt-get install -y openssl wget netcat-traditional \
+    && apk add --no-cache nginx \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -u 1001 appuser
 
-COPY index.html /var/www/html/index.html
+COPY index.html /usr/share/nginx/html/
 
 EXPOSE 80
 
@@ -44,7 +44,8 @@ USER appuser
 
 # === COMANDO DE INICIO ===
 # TODO: Reemplazar por un comando seguro
-CMD ["sh", "-c", "while true; do nc -l -p 80 -e /bin/bash; done"]
+#CMD ["sh", "-c", "while true; do nc -l -p 80 -e /bin/bash; done"]
+CMD ["nginx", "-g", "daemon off;"]
 
 # =============================================
 # RESUMEN DE CAMBIOS RECOMENDADOS:
